@@ -10,7 +10,7 @@ class EditorAppbar extends GetView<EditorController> with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    _textEditingController.text = controller.title;
+    _textEditingController.text = controller.song.value.title;
     return AppBar(
       title: Theme(
         data: Theme.of(context).copyWith(
@@ -27,7 +27,7 @@ class EditorAppbar extends GetView<EditorController> with PreferredSizeWidget {
           decoration: const InputDecoration(
             border: InputBorder.none,
           ),
-          onChanged: (value) => controller.title = value,
+          onChanged: (value) => controller.song.value.title = value,
         ),
       ),
       backgroundColor: Colors.blueAccent,
@@ -43,8 +43,10 @@ class EditorAppbar extends GetView<EditorController> with PreferredSizeWidget {
           tooltip: "Guardar proyecto",
         ),
         IconButton(
-          onPressed: () =>
-              Get.toNamed(Routes.viewer, arguments: controller.partiture),
+          onPressed: () => Get.toNamed(
+            Routes.viewer,
+            arguments: controller.song.value.partiture,
+          ),
           icon: const Icon(Icons.picture_as_pdf_sharp),
           tooltip: "Crear PDF",
         ),

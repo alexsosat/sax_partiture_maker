@@ -36,7 +36,7 @@ class PageList extends StatelessWidget {
           spacing: 8.0,
           runSpacing: 4.0,
           padding: const EdgeInsets.all(8),
-          children: _buildPreview(controller.partiture),
+          children: _buildPreview(controller.song.value.partiture),
           onReorder: controller.onReorder,
         ),
       );

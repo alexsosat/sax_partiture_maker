@@ -18,11 +18,15 @@ class ImgNote extends GetView<EditorController> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => controller.partiture.add(SaxNote(
-        id: id,
-        name: title,
-        imgUrl: imgRoute,
-      )),
+      onPressed: () => controller.song.update(
+        (val) => val!.partiture.add(
+          SaxNote(
+            id: id,
+            name: title,
+            imgUrl: imgRoute,
+          ),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

@@ -54,7 +54,9 @@ class _NotePreviewState extends State<NotePreview> {
                   setState(() {
                     isSelected = !isSelected;
                   });
-                  controller.partiture.removeAt(widget.index);
+                  controller.song.update((val) {
+                    val!.partiture.removeAt(widget.index);
+                  });
                 },
                 child: const Icon(Icons.close, color: Colors.white),
                 style: ButtonStyle(

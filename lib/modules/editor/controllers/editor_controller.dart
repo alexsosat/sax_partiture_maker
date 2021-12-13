@@ -1,52 +1,59 @@
 import 'package:get/get.dart';
 
 import 'package:sax_music_editor/modules/editor/models/sax_note.dart';
-import 'package:sax_music_editor/modules/editor/pages/widgets/snackbar.dart';
+import 'package:sax_music_editor/modules/editor/pages/widgets/overlays.dart';
 import 'package:sax_music_editor/modules/projects/models/song.dart';
 import 'package:sax_music_editor/services/song_storage.dart';
 
 class EditorController extends GetxController {
-  String title = "Nueva Canción";
-  List<SaxNote> partiture = List<SaxNote>.empty(growable: true).obs;
-
   final Storage storageManager = Storage();
   Rx<Song> song;
 
   EditorController({required this.song});
 
-  @override
-  void onInit() {
-    print(song.value.title);
-    super.onInit();
-  }
-
   void onReorder(int oldIndex, int newIndex) {
-    // song.update((val) {
-    //   SaxNote row = val!.partiture.removeAt(oldIndex);
-    //   val.partiture.insert(newIndex, row);
-    // });
-    SaxNote row = partiture.removeAt(oldIndex);
-    partiture.insert(newIndex, row);
+    song.update((val) {
+      SaxNote row = val!.partiture.removeAt(oldIndex);
+      val.partiture.insert(newIndex, row);
+    });
   }
 
   void saveSong() async {
-    if (title.isEmpty) {
+    final toSaveSong = song.value;
+    if (toSaveSong.title.isEmpty) {
       snackbarMessage(
         title: "El título de la canción no puede estar vacío",
         message: "Favor de colocar un título a la canción",
       );
-      return;
-    }
-
-    if (await storageManager
-        .writeSong(Song(title: title, partiture: partiture))) {
-      snackbarMessage(
-        title: "Canción guradada con éxito",
+    } else if (storageManager.songExists(toSaveSong)) {
+      openDialogWindow(
+        title: "El nombre de este proyecto ya esta en uso",
+        message: "¿Deseas sobre escribir el proyecto?",
+        onCancel: () => Get.back(),
+        onConfirm: () async {
+          if (await storageManager.overwriteSong(toSaveSong)) {
+            Get.back();
+            snackbarMessage(
+              title: "Canción guradada con éxito",
+            );
+          } else {
+            Get.back();
+            snackbarMessage(
+              title: "La canción no se pudo guardar",
+            );
+          }
+        },
       );
     } else {
-      snackbarMessage(
-        title: "La canción no se pudo guardar",
-      );
+      if (await storageManager.writeSong(toSaveSong)) {
+        snackbarMessage(
+          title: "Canción guradada con éxito",
+        );
+      } else {
+        snackbarMessage(
+          title: "La canción no se pudo guardar",
+        );
+      }
     }
   }
 }
