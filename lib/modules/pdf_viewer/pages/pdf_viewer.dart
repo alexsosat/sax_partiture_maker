@@ -6,10 +6,11 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
-import 'package:sax_music_editor/modules/editor/models/sax_note.dart';
+import 'package:sax_music_editor/modules/editor/pages/widgets/overlays.dart';
 import 'package:sax_music_editor/modules/pdf_viewer/pages/widgets/appbar.dart';
 
 import 'package:sax_music_editor/modules/pdf_viewer/pages/widgets/generate_partiture.dart';
+import 'package:sax_music_editor/modules/projects/models/song.dart';
 
 class PdfViewer extends StatelessWidget {
   const PdfViewer({Key? key}) : super(key: key);
@@ -18,27 +19,28 @@ class PdfViewer extends StatelessWidget {
     BuildContext context,
     LayoutCallback build,
     PdfPageFormat pageFormat,
+    String documentName,
   ) async {
     final bytes = await build(pageFormat);
 
     final appDocDir = await getApplicationDocumentsDirectory();
     final appDocPath = appDocDir.path;
-    final file = File(appDocPath + '/' + 'document.pdf');
-    print('Save as file ${file.path} ...');
+    final file = File(appDocPath + '/' + '$documentName.pdf');
+    snackbarMessage(title: "Guardado en ${file.path} ...");
     await file.writeAsBytes(bytes);
     await OpenFile.open(file.path);
   }
 
   @override
   Widget build(BuildContext context) {
-    final partiture =
-        ModalRoute.of(context)!.settings.arguments as List<SaxNote>;
+    final song = ModalRoute.of(context)!.settings.arguments as Song;
 
     final actions = <PdfPreviewAction>[
       if (!kIsWeb)
         PdfPreviewAction(
           icon: const Icon(Icons.save),
-          onPressed: _saveAsFile,
+          onPressed: (context, build, pageFormat) =>
+              _saveAsFile(context, build, pageFormat, song.title),
         )
     ];
 
@@ -46,8 +48,7 @@ class PdfViewer extends StatelessWidget {
       appBar: const ViewerAppBar(),
       body: PdfPreview(
         maxPageWidth: 700,
-        // build: (format) => generateResume(format, const CustomData()),
-        build: (format) => generatePartiture(format, partiture),
+        build: (format) => generatePartiture(format, song.partiture),
         actions: actions,
         canDebug: false,
 

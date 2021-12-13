@@ -6,7 +6,8 @@ class Storage {
 
   List<Song> get storedSongs {
     List<Song> returnable = [];
-    final List<dynamic> songsMap = getStorage.read(StorageRoutes.songsRoute);
+    final List<dynamic> songsMap =
+        getStorage.read(StorageRoutes.songsRoute) ?? [];
 
     for (String element in songsMap) {
       returnable.add(Song.fromJson(element));

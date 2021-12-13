@@ -45,7 +45,7 @@ class EditorAppbar extends GetView<EditorController> with PreferredSizeWidget {
         IconButton(
           onPressed: () => Get.toNamed(
             Routes.viewer,
-            arguments: controller.song.value.partiture,
+            arguments: controller.song.value,
           ),
           icon: const Icon(Icons.picture_as_pdf_sharp),
           tooltip: "Crear PDF",
