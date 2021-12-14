@@ -7,6 +7,34 @@ class NotesList extends StatelessWidget {
 
   final ScrollController _controller = ScrollController();
 
+  List<Widget> _getScaleNotes(
+      String scaleName, int scaleLength, bool isReversed) {
+    List<Widget> widgetNotes = List<Widget>.empty(growable: true);
+
+    if (!isReversed) {
+      for (int i = 0; i < scaleLength; i++) {
+        widgetNotes.add(
+          ImgNote(
+            imgRoute: "assets/images/notes/${scaleName}_escala/${notes[i]}.png",
+            title: notes[i],
+          ),
+        );
+      }
+    } else {
+      int iterations = notes.length - scaleLength;
+      for (int i = notes.length - 1; i >= iterations; i--) {
+        widgetNotes.add(
+          ImgNote(
+            imgRoute: "assets/images/notes/${scaleName}_escala/${notes[i]}.png",
+            title: notes[i],
+          ),
+        );
+      }
+    }
+
+    return widgetNotes;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,18 +55,11 @@ class NotesList extends StatelessWidget {
           addAutomaticKeepAlives: true,
           padding: const EdgeInsets.symmetric(vertical: 15),
           itemBuilder: (context, index) {
+            Map<String, dynamic> scale = scales[index];
             return ExpansionTile(
-              title: Text("${scales[index]} Escala".toUpperCase()),
-              children: notes
-                  .map(
-                    (note) => ImgNote(
-                      id: notes.indexOf(note) + (index * notes.length),
-                      imgRoute:
-                          "assets/images/notes/${scales[index]}_escala/$note.png",
-                      title: note,
-                    ),
-                  )
-                  .toList(),
+              title: Text("${scale['name']} Escala".toUpperCase()),
+              children: _getScaleNotes(
+                  scale['name'], scale['notes_count'], scale["reverse"]),
             );
           },
           separatorBuilder: (context, index) => const SizedBox(height: 15),

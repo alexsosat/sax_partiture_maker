@@ -25,7 +25,9 @@ class PdfViewer extends StatelessWidget {
 
     final appDocDir = await getApplicationDocumentsDirectory();
     final appDocPath = appDocDir.path;
-    final file = File(appDocPath + '/' + '$documentName.pdf');
+    final file =
+        File(appDocPath + "/" + "SaxMusicMaker" + '/' + '$documentName.pdf');
+    file.createSync(recursive: true);
     snackbarMessage(title: "Guardado en ${file.path} ...");
     await file.writeAsBytes(bytes);
     await OpenFile.open(file.path);

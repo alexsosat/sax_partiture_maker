@@ -4,14 +4,12 @@ import 'package:sax_music_editor/modules/editor/controllers/editor_controller.da
 import 'package:sax_music_editor/modules/editor/models/sax_note.dart';
 
 class ImgNote extends GetView<EditorController> {
-  final int id;
   final String imgRoute;
   final String title;
 
   const ImgNote({
     Key? key,
     required this.imgRoute,
-    required this.id,
     required this.title,
   }) : super(key: key);
 
@@ -21,7 +19,6 @@ class ImgNote extends GetView<EditorController> {
       onPressed: () => controller.song.update(
         (val) => val!.partiture.add(
           SaxNote(
-            id: id,
             name: title,
             imgUrl: imgRoute,
           ),

@@ -66,6 +66,8 @@ flutter:
   assets:
     - assets/images/notes/primera_escala/
     - assets/images/notes/segunda_escala/
+    - assets/images/notes/tercera_escala/
+    - assets/images/notes/cuarta_escala/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
