@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:sax_music_editor/modules/editor/pages/widgets/overlays.dart';
 import 'package:sax_music_editor/modules/projects/models/song.dart';
-import 'package:sax_music_editor/services/song_storage.dart';
+import 'package:sax_music_editor/services/file_handler.dart';
 
 class SongSelectionController extends GetxController
     with StateMixin<List<Song>> {
-  final Storage storage = Storage();
+  final SongStorageService storage = SongStorageService.instance;
 
   var storedSongs = List<Song>.empty(growable: true);
 
@@ -15,9 +15,9 @@ class SongSelectionController extends GetxController
     super.onInit();
   }
 
-  void getSongs() {
+  void getSongs() async {
     try {
-      storedSongs = storage.storedSongs;
+      storedSongs = await storage.getSongs();
       if (storedSongs.isEmpty) {
         change(storedSongs, status: RxStatus.empty());
       } else {
