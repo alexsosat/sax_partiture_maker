@@ -67,6 +67,7 @@ flutter:
     - assets/images/notes/segunda_escala/
     - assets/images/notes/tercera_escala/
     - assets/images/notes/cuarta_escala/
+    - assets/images/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

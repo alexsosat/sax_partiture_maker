@@ -9,14 +9,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          padding: const EdgeInsets.all(40),
           children: [
-            const FlutterLogo(
-              size: 90,
+            Image.asset(
+              "assets/images/logo.png",
+              height: 210,
             ),
-            const SizedBox(height: 90),
+            Text(
+              "Creador de música para Saxofón",
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline3!
+                  .copyWith(color: Colors.white),
+            ),
+            const SizedBox(height: 30),
             ElevatedButton(
               child: const Text("Nueva canción"),
               style: ElevatedButton.styleFrom(
@@ -32,14 +40,14 @@ class HomePage extends StatelessWidget {
               ),
               onPressed: () => Get.toNamed(Routes.projects),
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              child: const Text("Ajustes"),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(150, 60),
-              ),
-              onPressed: () {},
-            ),
+            // const SizedBox(height: 20),
+            // ElevatedButton(
+            //   child: const Text("Ajustes"),
+            //   style: ElevatedButton.styleFrom(
+            //     minimumSize: const Size(150, 60),
+            //   ),
+            //   onPressed: () {},
+            // ),
           ],
         ),
       ),
