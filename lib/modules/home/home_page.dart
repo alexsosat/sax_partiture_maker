@@ -42,11 +42,11 @@ class HomePage extends StatelessWidget {
             ),
             // const SizedBox(height: 20),
             // ElevatedButton(
-            //   child: const Text("Ajustes"),
+            //   child: const Text("Play Sound"),
             //   style: ElevatedButton.styleFrom(
             //     minimumSize: const Size(150, 60),
             //   ),
-            //   onPressed: () {},
+            //   onPressed: () => assetsAudioPlayer.play(),
             // ),
           ],
         ),

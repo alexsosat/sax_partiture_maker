@@ -16,6 +16,7 @@ class NotesList extends StatelessWidget {
         widgetNotes.add(
           ImgNote(
             imgRoute: "assets/images/notes/${scaleName}_escala/${notes[i]}.png",
+            audioRoute: "assets/audios/${scaleName}_escala/${notes[i]}.mp3",
             title: notes[i],
           ),
         );
@@ -26,6 +27,7 @@ class NotesList extends StatelessWidget {
         widgetNotes.add(
           ImgNote(
             imgRoute: "assets/images/notes/${scaleName}_escala/${notes[i]}.png",
+            audioRoute: "assets/audios/${scaleName}_escala/${notes[i]}.mp3",
             title: notes[i],
           ),
         );

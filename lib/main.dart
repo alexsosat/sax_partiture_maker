@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sax_music_editor/routes/app_pages.dart';
 
-void main() async {
+void main() {
   runApp(const MyApp());
 }
 

@@ -5,11 +5,13 @@ import 'package:sax_music_editor/modules/editor/models/sax_note.dart';
 
 class ImgNote extends GetView<EditorController> {
   final String imgRoute;
+  final String audioRoute;
   final String title;
 
   const ImgNote({
     Key? key,
     required this.imgRoute,
+    required this.audioRoute,
     required this.title,
   }) : super(key: key);
 
@@ -24,6 +26,7 @@ class ImgNote extends GetView<EditorController> {
           ),
         ),
       ),
+      onLongPress: () => controller.playAudioFromSource(audioRoute),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

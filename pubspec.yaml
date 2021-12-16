@@ -35,6 +35,9 @@ dependencies:
   printing: ^5.6.6
   path_provider: ^2.0.8
   open_file: ^3.2.1
+  # assets_audio_player: ^3.0.3+1
+  just_audio: ^0.9.18
+  just_audio_libwinmedia: ^0.0.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,6 +71,10 @@ flutter:
     - assets/images/notes/tercera_escala/
     - assets/images/notes/cuarta_escala/
     - assets/images/logo.png
+    - assets/audios/primera_escala/
+    - assets/audios/segunda_escala/
+    - assets/audios/tercera_escala/
+    - assets/audios/cuarta_escala/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

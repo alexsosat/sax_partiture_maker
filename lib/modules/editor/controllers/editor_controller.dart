@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 
 import 'package:sax_music_editor/modules/editor/models/sax_note.dart';
 import 'package:sax_music_editor/modules/editor/pages/widgets/overlays.dart';
@@ -9,7 +10,21 @@ class EditorController extends GetxController {
   final SongStorageService storageManager = SongStorageService.instance;
   Rx<Song> song;
 
+  final player = AudioPlayer();
+
   EditorController({required this.song});
+
+  void playAudioFromSource(String source) async {
+    print(source);
+    await player.setAsset(source);
+
+    await player.load();
+
+    player.play();
+    await Future.delayed(const Duration(seconds: 3));
+    await player.seek(const Duration(seconds: 0));
+    await player.pause();
+  }
 
   void onReorder(int oldIndex, int newIndex) {
     song.update((val) {
