@@ -15,7 +15,6 @@ class EditorController extends GetxController {
   EditorController({required this.song});
 
   void playAudioFromSource(String source) async {
-    print(source);
     await player.setAsset(source);
 
     await player.load();

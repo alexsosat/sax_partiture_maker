@@ -7,6 +7,11 @@ class NotesList extends StatelessWidget {
 
   final ScrollController _controller = ScrollController();
 
+  String _getAudioRoute(String scaleName, String note) {
+    note = note.replaceAll(RegExp(r'#'), '2');
+    return "assets/audios/${scaleName}_escala/$note.mp3";
+  }
+
   List<Widget> _getScaleNotes(
       String scaleName, int scaleLength, bool isReversed) {
     List<Widget> widgetNotes = List<Widget>.empty(growable: true);
@@ -16,7 +21,7 @@ class NotesList extends StatelessWidget {
         widgetNotes.add(
           ImgNote(
             imgRoute: "assets/images/notes/${scaleName}_escala/${notes[i]}.png",
-            audioRoute: "assets/audios/${scaleName}_escala/${notes[i]}.mp3",
+            audioRoute: _getAudioRoute(scaleName, notes[i]),
             title: notes[i],
           ),
         );
@@ -27,7 +32,7 @@ class NotesList extends StatelessWidget {
         widgetNotes.add(
           ImgNote(
             imgRoute: "assets/images/notes/${scaleName}_escala/${notes[i]}.png",
-            audioRoute: "assets/audios/${scaleName}_escala/${notes[i]}.mp3",
+            audioRoute: _getAudioRoute(scaleName, notes[i]),
             title: notes[i],
           ),
         );

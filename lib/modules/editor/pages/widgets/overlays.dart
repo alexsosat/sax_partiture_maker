@@ -42,7 +42,7 @@ void openDialogWindow(
               OutlinedButton(
                 onPressed: onCancel as void Function()?,
                 child: Text(
-                  'cancel'.tr,
+                  "Cancelar",
                   style: TextStyle(
                     color: (Get.isDarkMode) ? Colors.white : Colors.grey[800],
                   ),
@@ -53,9 +53,9 @@ void openDialogWindow(
                   backgroundColor: Colors.blueAccent,
                 ),
                 onPressed: onConfirm as void Function()?,
-                child: Text(
-                  'confirm'.tr,
-                  style: const TextStyle(
+                child: const Text(
+                  "Confirmar",
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
